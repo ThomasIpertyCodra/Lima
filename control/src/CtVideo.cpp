@@ -817,6 +817,10 @@ void CtVideo::getSupportedVideoMode(std::list<VideoMode> &modeList) const
 	case Bpp6:
 	  modeList.push_back(Y8); break;
 	case Bpp24:
+    modeList.push_back(Y32);
+    modeList.push_back(RGB24);
+    modeList.push_back(BAYER_BG8);
+    modeList.push_back(BAYER_RG8); break;
 	case Bpp24S:
     case Bpp28:
 	  modeList.push_back(Y32); break;
