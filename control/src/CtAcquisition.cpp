@@ -210,6 +210,11 @@ void CtAcquisition::_check_timing_ranges()
     m_inpars.accMaxExpoTime = m_valid_ranges.max_exp_time;
 }
 
+bool CtAcquisition::isHardwareAccumulation()
+{
+    return m_hw_sync->getIsHwAccSupported();
+}
+
 void CtAcquisition::apply(CtControl::ApplyPolicy policy, CtControl *control)
 {
   DEB_MEMBER_FUNCT();
@@ -326,6 +331,8 @@ void CtAcquisition::_apply()
 	    m_hw_sync->setNbFrames(m_acc_nframes);
 	  else
 	    m_hw_sync->setNbFrames(m_acc_nframes * m_inpars.acqNbFrames);
+
+    m_hw_sync->setNbAccFrames(m_acc_nframes);
 	}
       else
 	m_hw_sync->setNbFrames(m_inpars.acqNbFrames);

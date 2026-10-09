@@ -107,6 +107,9 @@ public:
 
 	virtual void getValidRanges(ValidRangesType& valid_ranges) = 0;
 
+	virtual bool getIsHwAccSupported();
+	virtual void setNbAccFrames(int nb_acc_frames);
+
 	void registerValidRangesCallback(ValidRangesCallback* cb);
 	void unregisterValidRangesCallback(ValidRangesCallback* cb);
         inline void validRangesChanged(const ValidRangesType &ranges)

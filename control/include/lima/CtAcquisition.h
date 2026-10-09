@@ -120,6 +120,9 @@ namespace lima
     void getTriggerModeList(TrigModeList& modes) const;
     
     bool isMonitorMode() const {return m_monitor_mode;}
+
+    bool isHardwareAccumulation();
+
   private:
     class _ValidRangesCallback;
     friend class _ValidRangesCallback;

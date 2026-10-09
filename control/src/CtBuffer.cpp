@@ -228,7 +228,6 @@ void CtBuffer::setup(CtControl *ct)
   
 
   img= ct->image();
-  img->getHwImageDim(fdim);
 
   int hwNbBuffer = acq_nframes,nbuffers = acq_nframes;
   m_ct_accumulation = NULL;
@@ -240,10 +239,21 @@ void CtBuffer::setup(CtControl *ct)
   switch (mode) {
   case Single:
     concat_nframes= 1;
+    img->getHwImageDim(fdim);
     break;
   case Accumulation:
     concat_nframes= 1;
-    m_ct_accumulation = ct->accumulation();
+
+    if(!acq->isHardwareAccumulation())
+    {
+      m_ct_accumulation = ct->accumulation();
+      img->getHwImageDim(fdim);
+    }
+    else
+    {
+      img->getImageDim(fdim);
+    }
+
     hwNbBuffer = 16;
     break;
   case Concatenation:
@@ -251,6 +261,7 @@ void CtBuffer::setup(CtControl *ct)
     if (acq_nframes > 0)
       hwNbBuffer = (acq_nframes + concat_nframes - 1) / concat_nframes;
     nbuffers = hwNbBuffer;
+    img->getHwImageDim(fdim);
     break;
   }
   m_hw_buffer->setFrameDim(fdim);

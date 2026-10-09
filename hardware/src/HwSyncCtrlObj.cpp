@@ -95,6 +95,13 @@ void HwSyncCtrlObj::getNbFrames(int& nb_frames)
 	DEB_RETURN() << DEB_VAR1(nb_frames);
 }
 
+bool HwSyncCtrlObj::getIsHwAccSupported()
+{
+  return false;
+}
+
+void HwSyncCtrlObj::setNbAccFrames(int nb_acc_frames){}
+
 void HwSyncCtrlObj::registerValidRangesCallback(ValidRangesCallback *cb)
 {
   DEB_MEMBER_FUNCT();
